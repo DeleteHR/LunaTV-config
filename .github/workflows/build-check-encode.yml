@@ -6,6 +6,7 @@ on:
   push:
     paths:
       - 'LunaTV-config.json'
+      - 'to_tvbox.js'
   workflow_dispatch:
     inputs:
       api_name:
@@ -83,6 +84,19 @@ jobs:
 
           node encode.js
 
+      # 5.5️⃣ 生成 TVBox 可用的 sites 配置
+      - name: Generate TVBox configs
+        run: node to_tvbox.js
+
+      - name: Validate TVBox configs
+        run: |
+          for f in tvbox.json tvbox-jingjian.json tvbox-jin18.json; do
+            [ -f "$f" ] || { echo "✗ 缺少 $f"; exit 1; }
+            jq -e '.sites | type == "array" and length > 0' "$f" > /dev/null \
+              || { echo "✗ $f 结构不合法"; exit 1; }
+            echo "✓ $f  源数量: $(jq '.sites | length' "$f")"
+          done
+
       # 6️⃣ 运行 API 检查脚本
       - name: Run API check
         run: |
@@ -100,18 +114,16 @@ jobs:
           # 配置 Git
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           # 拉取远程 main 分支，避免冲突
           git fetch origin main
           git reset --soft origin/main
 
           # 添加所有生成文件
-          git add jingjian.json jin18.json LunaTV-config.txt jingjian.txt jin18.txt report.md README.md
+          git add jingjian.json jin18.json LunaTV-config.txt jingjian.txt jin18.txt tvbox.json tvbox-jingjian.json tvbox-jin18.json report.md README.md
 
           # 提交更新，如果没有变化则输出提示
-          git commit -m "自动更新 JSON、Base58 和 API 报告 ($(date -d '+8 hour' +'%Y-%m-%d %H:%M:%S CST'))" || echo "⚠️ 没有文件变化可提交"
+          git commit -m "自动更新 JSON、Base58、TVBox 和 API 报告 ($(date -d '+8 hour' +'%Y-%m-%d %H:%M:%S CST'))" || echo "⚠️ 没有文件变化可提交"
 
           # 推送到远程 main
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
-
-

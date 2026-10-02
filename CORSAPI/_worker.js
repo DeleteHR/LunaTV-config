@@ -37,7 +37,12 @@ const FORMAT_CONFIG = {
   '2': { proxy: false, base58: true },
   'base58': { proxy: false, base58: true },
   '3': { proxy: true, base58: true },
-  'proxy-base58': { proxy: true, base58: true }
+  'proxy-base58': { proxy: true, base58: true },
+  // TVBox 格式：原始 / 带代理前缀
+  'tvbox': { proxy: false, base58: false, tvbox: true },
+  '4': { proxy: false, base58: false, tvbox: true },
+  'proxy-tvbox': { proxy: true, base58: false, tvbox: true },
+  '5': { proxy: true, base58: false, tvbox: true }
 }
 
 // Base58 编码函数
@@ -64,6 +69,46 @@ function base58Encode(obj) {
   }
 
   return result
+}
+
+// ---------- 转换为 TVBox 可用的 sites 配置 ----------
+function toTvboxSites(cfg) {
+  const apiSite = (cfg && (cfg.api_site || cfg.sites)) || {}
+  const list = Array.isArray(apiSite)
+    ? apiSite.map((v, i) => [v.key || 'site' + i, v])
+    : Object.entries(apiSite)
+
+  const used = new Set()
+  const sites = []
+
+  for (const [rawKey, v] of list) {
+    if (!v || typeof v.api !== 'string' || !/^https?:\/\//i.test(v.api)) continue
+    let key = String(rawKey)
+      .normalize('NFKC')
+      .replace(/[^A-Za-z0-9_]/g, '_')
+      .replace(/_+/g, '_')
+      .replace(/^_+|_+$/g, '')
+    if (!key) key = 'site'
+    if (/^[0-9]/.test(key)) key = 's' + key
+    const base = key
+    let n = 2
+    while (used.has(key)) key = base + '_' + n++
+    used.add(key)
+
+    const site = {
+      key,
+      name: String(v.name || rawKey).trim(),
+      type: 1,
+      api: v.api,
+      searchable: 1,
+      quickSearch: 1,
+      filterable: 0
+    }
+    if (/🔞/.test(v.name || '')) site.adult = 1
+    sites.push(site)
+  }
+
+  return { sites }
 }
 
 // JSON api 字段前缀替换
@@ -231,6 +276,12 @@ async function handleFormatRequest(formatParam, sourceParam, prefixParam, defaul
       ? addOrReplacePrefix(data, prefixParam || defaultPrefix)
       : data
 
+    if (config.tvbox) {
+      return new Response(JSON.stringify(toTvboxSites(newData), null, 2), {
+        headers: { 'Content-Type': 'application/json;charset=UTF-8', ...CORS_HEADERS },
+      })
+    }
+
     if (config.base58) {
       const encoded = base58Encode(newData)
       return new Response(encoded, {
@@ -284,7 +335,9 @@ async function handleHomePage(currentOrigin, defaultPrefix) {
         <td><code>0</code> 或 <code>raw</code> = 原始 JSON<br>
             <code>1</code> 或 <code>proxy</code> = 添加代理前缀<br>
             <code>2</code> 或 <code>base58</code> = 原始 Base58 编码<br>
-            <code>3</code> 或 <code>proxy-base58</code> = 代理 Base58 编码</td>
+            <code>3</code> 或 <code>proxy-base58</code> = 代理 Base58 编码<br>
+            <code>4</code> 或 <code>tvbox</code> = TVBox sites 格式<br>
+            <code>5</code> 或 <code>proxy-tvbox</code> = 带代理前缀的 TVBox 格式</td>
       </tr>
       <tr>
         <td>source</td>
