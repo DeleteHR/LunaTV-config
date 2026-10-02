@@ -65,6 +65,18 @@ https://cdn.jsdelivr.net/gh/DeleteHR/LunaTV-config@main/jin18.txt
 
 **填入位置**：TVBox / CatVodTVBox →「设置 → 配置地址」；影视仓 / OK影视 → 首页右上角「配置」。
 
+### 🌏 国内加速
+
+与 MoonTV / LunaTV 订阅同理，`raw.githubusercontent.com` 在国内多数网络无法直连，把域名换成 jsDelivr 镜像即可：
+
+| 版本 | 源数量 | 加速订阅地址 |
+| --- | ---: | --- |
+| 完整版 | 69 | `https://cdn.jsdelivr.net/gh/DeleteHR/LunaTV-config@main/tvbox.json` |
+| 精简+成人版 | 47 | `https://cdn.jsdelivr.net/gh/DeleteHR/LunaTV-config@main/tvbox-jingjian.json` |
+| 精简版 | 28 | `https://cdn.jsdelivr.net/gh/DeleteHR/LunaTV-config@main/tvbox-jin18.json` |
+
+⚠️ jsDelivr 有约 12 小时缓存，改完想立刻生效，请把 `@main` 换成具体的 commit SHA。
+
 完整说明（字段含义、校验方法、常见问题）见 [TVBOX使用说明.md](./TVBOX使用说明.md)。
 
 ---
