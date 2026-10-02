@@ -1,63 +1,126 @@
-# MoonTV/LunaTV 配置编辑器
-https://hafrey1.github.io/LunaTV-config  
+# MoonTV / LunaTV 源配置
 
---- 
+自动生成 **MoonTV / LunaTV**、**TVBox** 两类客户端可用的订阅配置，并每日自动检测源可用性。
 
-## DigitalPlat 免费域名注册链接(us.kg)
-免费注册 **.qzz.io  和 **.qd.je 域名,成功注册后多获得+1个免费域名额度
-
-[注册地址](https://dash.domain.digitalplat.org/signup?ref=628Y3lAzQY)
-
-##  MoonTV/LunaTV配置
-订阅使用：复制下面链接  
-
-👉 Base58编码订阅链接[精简版🎬源链接](https://raw.githubusercontent.com/hafrey1/LunaTV-config/refs/heads/main/jin18.txt)    （推荐使用自己部署的代理）精简版禁18源
-
-```bash
-https://pz.v88.qzz.io?format=2&source=jin18
-```
-```bash
-https://raw.githubusercontent.com/hafrey1/LunaTV-config/refs/heads/main/jin18.txt
-```
-👉 Base58编码订阅链接[精简版🎬+🔞源链接](https://raw.githubusercontent.com/hafrey1/LunaTV-config/refs/heads/main/jingjian.txt) （推荐使用自己部署的代理）精简版剔除无搜索结果和污染搜索结果源                             
-```bash
-https://pz.v88.qzz.io?format=2&source=jingjian
-```
-```bash
-https://raw.githubusercontent.com/hafrey1/LunaTV-config/refs/heads/main/jingjian.txt
-```
-
-👉 Base58编码订阅链接[完整版🎬+🔞源链接](https://raw.githubusercontent.com/hafrey1/LunaTV-config/refs/heads/main/LunaTV-config.txt) （推荐使用自己部署的代理）                          
-```bash
-https://pz.v88.qzz.io?format=2&source=full
-```
-```bash
-https://raw.githubusercontent.com/hafrey1/LunaTV-config/refs/heads/main/LunaTV-config.txt
-```
-
---- 
-
-# 🌐 CORSAPI（API 代理 & JSON 订阅器）
-
-这是一个基于 **Cloudflare Workers** 的中转代理 + JSON 配置前缀替换工具。
-
-支持将 API 请求通过 Worker 转发，并自动为 JSON 配置中的 `api` 字段添加/替换前缀。
-
-同时支持生成 **Base58 编码的订阅格式**，并提供**多种配置源选择**，方便在外部应用中快速使用。
+🛠️ **在线配置编辑器**：https://DeleteHR.github.io/LunaTV-config
 
 ---
 
+## 📺 一、MoonTV / LunaTV 订阅
+
+复制下面的链接，填入 **MoonTV / LunaTV / MoonTVPlus** 的「配置订阅」输入框即可。
+
+### 🎬 精简版 · 28 个源（不含 🔞）
+
+已剔除全部异常源与成人源，适合家庭场景。
+
+```bash
+https://raw.githubusercontent.com/DeleteHR/LunaTV-config/refs/heads/main/jin18.txt
+```
+
+原始 JSON：`https://raw.githubusercontent.com/DeleteHR/LunaTV-config/refs/heads/main/jin18.json`
+
+### 🎬🔞 精简+成人版 · 47 个源
+
+在精简版基础上保留成人源，但已剔除带 `_comment` 标记的无结果源与污染源。
+
+```bash
+https://raw.githubusercontent.com/DeleteHR/LunaTV-config/refs/heads/main/jingjian.txt
+```
+
+原始 JSON：`https://raw.githubusercontent.com/DeleteHR/LunaTV-config/refs/heads/main/jingjian.json`
+
+### 🎬🔞 完整版 · 69 个源
+
+包含全部源（含已标记异常的条目），兼容性最好。
+
+```bash
+https://raw.githubusercontent.com/DeleteHR/LunaTV-config/refs/heads/main/LunaTV-config.txt
+```
+
+原始 JSON：`https://raw.githubusercontent.com/DeleteHR/LunaTV-config/refs/heads/main/LunaTV-config.json`
+
+### 🌏 国内加速
+
+`raw.githubusercontent.com` 在国内多数网络无法直连，可把域名换成 jsDelivr 镜像：
+
+```bash
+https://cdn.jsdelivr.net/gh/DeleteHR/LunaTV-config@main/jin18.txt
+```
+
+把文件名换成 `jingjian.txt` / `LunaTV-config.txt` 即为另外两档。
+⚠️ jsDelivr 有约 12 小时缓存，改完想立刻生效，请把 `@main` 换成具体的 commit SHA。
+
+---
+
+## 📦 二、TVBox 订阅
+
+本仓库额外生成 **TVBox 可直接读取的 `sites` 配置**。所有源都是苹果 CMS V10 的 JSON 接口，**不需要 spider jar**。
+
+| 版本 | 源数量 | 订阅地址 |
+| --- | ---: | --- |
+| 完整版 | 69 | `https://raw.githubusercontent.com/DeleteHR/LunaTV-config/refs/heads/main/tvbox.json` |
+| 精简+成人版 | 47 | `https://raw.githubusercontent.com/DeleteHR/LunaTV-config/refs/heads/main/tvbox-jingjian.json` |
+| 精简版 | 28 | `https://raw.githubusercontent.com/DeleteHR/LunaTV-config/refs/heads/main/tvbox-jin18.json` |
+
+**填入位置**：TVBox / CatVodTVBox →「设置 → 配置地址」；影视仓 / OK影视 → 首页右上角「配置」。
+
+完整说明（字段含义、校验方法、常见问题）见 [TVBOX使用说明.md](./TVBOX使用说明.md)。
+
+---
+
+## 📊 三、配置源说明
+
+| 配置源 | 文件名 | 源数量 | 含 🔞 | 说明 |
+| --- | --- | ---: | :---: | --- |
+| 精简版 | `jin18.json` | 28 | ❌ | 完整版 → 剔除 `_comment` 源 → 剔除 🔞 源 |
+| 精简+成人版 | `jingjian.json` | 47 | ✅ | 完整版剔除所有带 `_comment` 标记的异常源 |
+| 完整版 | `LunaTV-config.json` | 69 | ✅ | 全部源，含已标记异常的条目 |
+
+**`_comment` 约定**：给某个源加上 `"_comment": "说明"` 字段，它就会从 `jingjian` / `jin18` 中被剔除，但仍保留在完整版里，便于维护标注。当前共 22 个源带此标记。
+
+### 🔄 每日自动生成流程
+
+由 `.github/workflows/build-check-encode.yml` 执行：
+
+1. `jingjian.json` ← `LunaTV-config.json` 剔除全部 `_comment` 条目
+2. `jin18.json` ← `jingjian.json` 剔除名称以 🔞 开头的条目
+3. 三份 JSON 分别 Base58 编码 → `LunaTV-config.txt` / `jingjian.txt` / `jin18.txt`
+4. `to_tvbox.js` 把 `api_site` 转成 TVBox `sites` 数组 → `tvbox.json` / `tvbox-jingjian.json` / `tvbox-jin18.json`
+5. `check_api.js` 检测源可用性 → 刷新文末的 API 健康报告
+
+### ✏️ 如何增删源
+
+打开 `LunaTV-config.json`，在 `api_site` 对象里增删条目后提交即可。工作流的 push 触发器监听 `LunaTV-config.json` 与 `to_tvbox.js`，提交后会自动重算全部派生文件与订阅链接。
+
+```json
+{
+  "cache_time": 7200,
+  "api_site": {
+    "example.com": {
+      "name": "🎬示例资源",
+      "api": "https://example.com/api.php/provide/vod",
+      "detail": "https://example.com"
+    }
+  }
+}
+```
+
+---
+
+# 🌐 CORSAPI（API 代理 & JSON 订阅器）
+
+一个基于 **Cloudflare Workers** 的中转代理 + JSON 配置前缀替换工具。
+
+支持把源 API 请求经 Worker 转发，并自动为 JSON 配置中的 `api` 字段添加 / 替换前缀，同时输出 **Base58 订阅**与 **TVBox `sites` 格式**，便于各类客户端直接使用。
+
 <details>
-  
+
 <summary>✨ 功能特性</summary>
-  
-# 
 
 ### 1. 通用 API 代理
 
-使用 `?url=` 参数转发任意 API 请求
-
-**示例：**
+使用 `?url=` 参数转发任意 API 请求：
 
 ```
 https://<你的域名>/?url=https://ikunzyapi.com/api.php/provide/vod/
@@ -67,66 +130,64 @@ https://<你的域名>/?url=https://ikunzyapi.com/api.php/provide/vod/
 
 使用 `?source=` 参数选择不同的资源配置：
 
-- **`source=jin18`** - 精简版（31个资源，仅普通内容）
-- **`source=jingjian`** - 精简+成人版（61个资源）
-- **`source=full`** - 完整版（88个资源，**默认**）
+- **`source=jin18`** —— 精简版（28 个源，仅普通内容）
+- **`source=jingjian`** —— 精简+成人版（47 个源）
+- **`source=full`** —— 完整版（69 个源，**默认**）
 
 ### 3. 统一的 format 参数
 
-使用 `?format=` 参数控制输出格式
+使用 `?format=` 参数控制输出格式：
 
-- **`format=0`** 或 **`format=raw`** - 原始 JSON
-- **`format=1`** 或 **`format=proxy`** - 添加代理前缀的 JSON
-- **`format=2`** 或 **`format=base58`** - 原始 JSON 的 Base58 编码
-- **`format=3`** 或 **`format=proxy-base58`** - 代理前缀 JSON 的 Base58 编码
+- **`format=0`** 或 **`format=raw`** —— 原始 JSON
+- **`format=1`** 或 **`format=proxy`** —— 添加代理前缀的 JSON
+- **`format=2`** 或 **`format=base58`** —— 原始 JSON 的 Base58 编码
+- **`format=3`** 或 **`format=proxy-base58`** —— 代理前缀 JSON 的 Base58 编码
+- **`format=4`** 或 **`format=tvbox`** —— TVBox `sites` 格式（无需 spider）
+- **`format=5`** 或 **`format=proxy-tvbox`** —— 带代理前缀的 TVBox 格式
 
---- 
+---
 
 </details>
 
 <details>
-  
+
 <summary>🚀 部署方法</summary>
-  
-#   
 
 🌐 部署到 Cloudflare Workers
 
 1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com)。
 2. 进入 Workers & Pages → 创建应用程序（Create Application） → Workers → 从 Hello World! 开始 → 项目命名 → 部署 → 编辑代码。
-3. 将项目中的 _worker.js 文件内容复制到在线编辑器中。
+3. 将项目中的 `CORSAPI/_worker.js` 文件内容复制到在线编辑器中。
 4. 点击 保存并部署（Save and Deploy） 完成上线。
 5. （可选）若项目使用 KV 存储：
-- 存储和数据库 → Workers KV → Ceate instance  → 命名空间名称（KV Namespaces） 创建一个新的命名空间。
-- 命名空间名称可自定义，例如：MyKVNamespace。
-- 在 Worker设置 绑定 → 添加绑定 → KV命名空间 → 添加绑定 → 变量名为：CONFIG_KV → 创建的KV命名空间 → 添加绑定 。
-6. 绑定自定义域名：打开 Worker 设置 → Triggers(域和路由) → 添加 → Custom Domains(自定义域名)，添加你的域名并保存。
+   - 存储和数据库 → Workers KV → Create instance → 命名空间名称（KV Namespaces） 创建一个新的命名空间。
+   - 命名空间名称可自定义，例如：`MyKVNamespace`。
+   - 在 Worker 设置 → 绑定 → 添加绑定 → KV 命名空间 → 添加绑定 → 变量名为：`CONFIG_KV` → 创建的 KV 命名空间 → 添加绑定。
+6. 绑定自定义域名：打开 Worker 设置 → Triggers（域和路由） → 添加 → Custom Domains（自定义域名），添加你的域名并保存。
 
 📦 部署到 Cloudflare Pages
 
 1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com)。
-2. 下载仓库中的 _worker.js 文件。
-3. 在本地新建一个空文件夹（名称随意），将 _worker.js 放入其中。
-4. 前往 Workers & Pages → 创建应用程序（Create Application） → Pages → 上传资产（开始使用） → 项目命名 → 创建项目 → 从计算机中选择 → 上传文件夹 → 选择新建的文件 → 部署站点（Deploy Site）。
+2. 下载仓库中的 `CORSAPI/_worker.js` 文件。
+3. 在本地新建一个空文件夹（名称随意），将 `_worker.js` 放入其中。
+4. 前往 Workers & Pages → 创建应用程序（Create Application） → Pages → 上传资产（开始使用） → 项目命名 → 创建项目 → 从计算机中选择 → 上传文件夹 → 选择新建的文件夹 → 部署站点（Deploy Site）。
 5. （可选）如需使用 KV：
-- 存储和数据库 → Workers KV → Ceate instance  → 命名空间名称（KV Namespaces） 创建一个KV命名空间。
-- 新建命名空间（名称随意），绑定变量名为：CONFIG_KV。
-- 部署完成后，前往 Pages 控制台 → 设置 → 绑定（Bindings） → 添加 → KV 命名空间  →  变量名为：CONFIG_KV → 选择创建的KV空间 → 保存。
-- 保存后返回 “部署” 选项卡。
-8. 点击 创建新部署（Create New Deployment），重新上传文件并点击 保存并部署 即可。
+   - 存储和数据库 → Workers KV → Create instance → 命名空间名称（KV Namespaces） 创建一个 KV 命名空间。
+   - 新建命名空间（名称随意），绑定变量名为：`CONFIG_KV`。
+   - 部署完成后，前往 Pages 控制台 → 设置 → 绑定（Bindings） → 添加 → KV 命名空间 → 变量名为：`CONFIG_KV` → 选择创建的 KV 空间 → 保存。
+   - 保存后返回「部署」选项卡。
+6. 点击 创建新部署（Create New Deployment），重新上传文件并点击 保存并部署 即可。
 
-- 部署完成后，你就拥有了自己的 API 代理与订阅转换服务！
+- 部署完成后，你就拥有了自己的 API 代理与订阅转换服务。
 
----   
+---
 
 </details>
 
 <details>
 <summary>🔗 使用示例</summary>
-  
-#  
 
-假设你的 Worker 部署在：[`https://api.example.workers.dev`](https://api.example.workers.dev)
+假设你的 Worker 部署在 `https://api.example.workers.dev`
 
 ### 示例 1：代理任意 API
 
@@ -158,54 +219,56 @@ https://api.example.workers.dev/?format=2&source=jingjian
 https://api.example.workers.dev/?format=3&source=jingjian
 ```
 
-### 示例 6：自定义代理前缀
+### 示例 6：获取 TVBox 配置
+
+```jsx
+https://api.example.workers.dev/?format=4&source=full
+```
+
+### 示例 7：自定义代理前缀
 
 ```jsx
 https://api.example.workers.dev/?format=1&source=full&prefix=https://my-proxy.com/?url=
 ```
 
----   
-  
+---
+
 </details>
 
 <details>
 <summary>🛠️ 参数说明</summary>
-  
-# 
-  
-| 参数     | 说明             | 可选值                          | 示例         |        
-| -------- | ---------------- | ------------------------------- | ------------ |
-| `url`    | 代理任意 API 请求 | 任意有效 URL                     | `?url=https://...` |
-| `format` | 配置模式         | `format=0 或 raw - 原始 JSON` <br> `format=1 或 proxy - 添加代理前缀` <br> `format=2 或 base58 - 原始 Base58` <br> `format=3 或 proxy-base58 - 代理 Base58` | `?format=0` |
-| `source` | 配置源选择       | `source=jin18` - 精简版 <br> `source=jingjian` - 精简+成人 <br> `source=full` - 完整版） | `?source=jin18` |
-| `prefix` | 自定义代理前缀   | 任意代理地址                      | `?prefix=https://.../?url=` |
-| `errors&limit=10` | 查看错误日志 | `errors&limit=10`                 | `https://<你的域名>?errors&limit=10` |
 
----  
+| 参数 | 说明 | 可选值 | 示例 |
+| --- | --- | --- | --- |
+| `url` | 代理任意 API 请求 | 任意有效 URL | `?url=https://...` |
+| `format` | 配置模式 | `0 / raw` 原始 JSON <br> `1 / proxy` 添加代理前缀 <br> `2 / base58` 原始 Base58 <br> `3 / proxy-base58` 代理 Base58 <br> `4 / tvbox` TVBox sites <br> `5 / proxy-tvbox` 代理 TVBox | `?format=0` |
+| `source` | 配置源选择 | `jin18` 精简版（28） <br> `jingjian` 精简+成人（47） <br> `full` 完整版（69） | `?source=jin18` |
+| `prefix` | 自定义代理前缀 | 任意代理地址 | `?prefix=https://.../?url=` |
+| `errors&limit=10` | 查看错误日志 | `errors&limit=10` | `https://<你的域名>?errors&limit=10` |
+
+---
 
 ## 📦 配置源对比
 
 | 配置源 | 资源数量 | 包含成人内容 | 适用场景 |
-| --- | --- | --- | --- |
-| **jin18** | 31个 | ❌ 否 | 家庭使用、轻量级应用 |
-| **jingjian** | 61个 | ✅ 是 | 个人使用、中等需求 |
-| **full** | 88个 | ✅ 是 | 完整功能、最大兼容性 |
+| --- | ---: | :---: | --- |
+| **jin18** | 28 个 | ❌ 否 | 家庭使用、轻量级应用 |
+| **jingjian** | 47 个 | ✅ 是 | 个人使用、中等需求 |
+| **full** | 69 个 | ✅ 是 | 完整功能、最大兼容性 |
 
+🧩 **前缀替换逻辑**
 
-🧩 **前缀替换逻辑**  
-- 若 JSON 中的 `api` 字段已包含旧前缀（`?url=`），系统会自动去除旧前缀并替换为新的代理前缀。  
+- 若 JSON 中的 `api` 字段已包含旧前缀（`?url=`），系统会自动去除旧前缀并替换为新的代理前缀。
 - 可自定义代理路径，方便接入私有 API 或多 Worker 配置。
-  
----   
-  
+
+---
+
 </details>
 
 <details>
-<summary> 📋 完整订阅链接模板</summary>
-  
-# 
+<summary>📋 完整订阅链接模板</summary>
 
-将 `\<你的域名\>` 替换为你的实际 Worker 地址：
+将 `<你的域名>` 替换为你的实际 Worker 地址。
 
 ### 精简版（jin18）
 
@@ -221,6 +284,9 @@ https://<你的域名>/?format=2&source=jin18
 
 # 代理 Base58 编码（推荐用于订阅）
 https://<你的域名>/?format=3&source=jin18
+
+# TVBox 配置
+https://<你的域名>/?format=4&source=jin18
 ```
 
 ### 精简+成人版（jingjian）
@@ -237,6 +303,9 @@ https://<你的域名>/?format=2&source=jingjian
 
 # 代理 Base58 编码（推荐用于订阅）
 https://<你的域名>/?format=3&source=jingjian
+
+# TVBox 配置
+https://<你的域名>/?format=4&source=jingjian
 ```
 
 ### 完整版（full，默认）
@@ -253,42 +322,41 @@ https://<你的域名>/?format=2&source=full
 
 # 代理 Base58 编码（推荐用于订阅）
 https://<你的域名>/?format=3&source=full
+
+# TVBox 配置
+https://<你的域名>/?format=4&source=full
 ```
 
----   
+---
 
 </details>
 
 <details>
 <summary>📌 注意事项</summary>
-  
-# 
-  
+
 - **Workers 免费额度**：每天 10 万次请求，适合轻量使用。超出后需升级付费套餐。
 - **代理替换逻辑**：如果 JSON 中 `api` 字段已包含 `?url=` 前缀，会先去掉旧前缀，再加上新前缀。
 - **Base58 输出**：适合直接作为订阅链接在支持该格式的客户端中使用。
-- **配置源更新**：配置源来自 GitHub，内容会定期更新。Worker 会缓存 7200 秒（2小时）。
+- **配置源更新**：配置源来自 GitHub，内容会定期更新。Worker 会缓存 7200 秒（2 小时）。
 - **超时设置**：默认请求超时时间为 9 秒，超时后会返回错误信息。
 - **CORS 支持**：已启用完整的 CORS 支持，可直接在前端应用中调用。
 
----   
-  
+---
+
 </details>
 
 <details>
 <summary>🔧 高级配置</summary>
-  
-# 
 
 ### 修改配置源地址
 
-在 `worker.js` 中找到 `JSON_SOURCES` 对象并修改：
+在 `CORSAPI/_worker.js` 中找到 `JSON_SOURCES` 对象并修改：
 
 ```jsx
 const JSON_SOURCES = {
-  'jin18': 'https://raw.githubusercontent.com/your-repo/jin18.json',
-  'jingjian': 'https://raw.githubusercontent.com/your-repo/jingjian.json',
-  'full': 'https://raw.githubusercontent.com/your-repo/full.json'
+  'jin18': 'https://raw.githubusercontent.com/<你的用户名>/LunaTV-config/refs/heads/main/jin18.json',
+  'jingjian': 'https://raw.githubusercontent.com/<你的用户名>/LunaTV-config/refs/heads/main/jingjian.json',
+  'full': 'https://raw.githubusercontent.com/<你的用户名>/LunaTV-config/refs/heads/main/LunaTV-config.json'
 }
 ```
 
@@ -314,40 +382,23 @@ console.log(`Request from: ${request.headers.get('cf-connecting-ip')}`)
 
 ## 🆕 更新内容
 
-- 📄 **Luna-TV配置编辑器**：专业的 JSON 配置文件可视化编辑器。  
-- 🔍 **自动检测API状态**：每 1 小时检测一次 API 可用性，并记录最近 100 次测试报告。  
-- 🧩 **源名称前添加图标**：源名称前添加图标，方便区分。  
-- 🌐 **被墙资源自动中转**：为受限 API 提供 CF Worker 中转能力。  
-- 📄 **添加_comment参数**：为异常源添加_comment参数以方便维护,不影响正常使用!(2025.12.06)
+- 📄 **LunaTV 配置编辑器**：可视化编辑 `LunaTV-config.json`，支持直接提交到本仓库。
+- 📺 **TVBox 订阅输出**：新增 `to_tvbox.js`，自动把 `api_site` 转成 TVBox `sites` 配置。
+- 🔍 **自动检测 API 状态**：每 1 小时检测一次 API 可用性，并记录最近 100 次测试报告。
+- 🧩 **源名称前添加图标**：方便区分不同类型与来源。
+- 🌐 **被墙资源自动中转**：为受限 API 提供 CF Worker 中转能力。
+- 📄 **添加 `_comment` 参数**：为异常源添加 `_comment` 参数以方便维护，不影响正常使用。
 
----   
+---
 
-## 🧪 测试与示例
-
-### ✅ 使用中转API测试
-- 通过 CORSAPI 转发后，大幅提升视频源可用率。  
-- 可“复活”原本无法访问的资源。  
-
-### ⚙️ 精简版源更新
-- 去除污染源与无搜索结果源（如 🎬虎牙、🔞丝袜、🔞色猫）。  
-- 精简后共 **57 个可用源**，在中转代理下全部可访问。  
-<details>
-<summary>示例</summary>
-<img width="1025" height="486" alt="61" src="https://github.com/user-attachments/assets/81c80108-7c03-4583-87ab-b7b57cdfd3bd" />
-  
-  
-</details>
-
----   
-  
 # API 健康报告（每日自动检测API状态）
 
-## API 状态（最近更新：2026-10-03 00:12 CST）
+## API 状态（最近更新：2026-10-02 23:44 CST）
 
 - 总 API 数量：69
 - 成功 API 数量：64
 - 失败 API 数量：5
-- 平均可用率：94.5%
+- 平均可用率：94.6%
 - 完美可用率（100%）：58 个
 - 高可用率（80%-99%）：6 个
 - 中等可用率（50%-79%）：0 个
@@ -419,17 +470,15 @@ console.log(`Request from: ${request.headers.get('cf-connecting-ip')}`)
 | ✅ | 🔞 CK-资源 | [Link](https://ckzy.me) | [Link](https://ckzy.me/api.php/provide/vod) | ✅ | 29 | 1 | 96.7% | ✅✅✅✅✅✅✅ |
 | ✅ | 🔞桃花资源 | [Link](https://thzy8.me) | [Link](https://thzy1.me/api.php/provide/vod) | ✅ | 29 | 1 | 96.7% | ✅✅✅✅✅✅✅ |
 | ✅ | 🔞精品资源 | [Link](https://www.jingpinx.com) | [Link](https://www.jingpinx.com/api.php/provide/vod) | ✅ | 29 | 1 | 96.7% | ✅✅✅✅✅✅✅ |
-| ✅ | 🔞黄色仓库 | [Link](https://hsckzy.xyz) | [Link](https://hsckzy.xyz/api.php/provide/vod) | ✅ | 29 | 1 | 96.7% | ✅✅✅✅✅✅✅ |
-| ✅ | 🔞souavZY | [Link](https://api.souavzyw.net) | [Link](https://api.souavzyw.net/api.php/provide/vod) | ✅ | 28 | 2 | 93.3% | ❌❌✅✅✅✅✅ |
-| ✅ | 🔞鲨鱼资源 | [Link](https://shayuapi.com) | [Link](https://shayuapi.com/api.php/provide/vod) | ✅ | 28 | 2 | 93.3% | ❌✅✅✅✅✅✅ |
-| 🚨 | 🎬百度云zy | [Link](https://bdzy1.com) | [Link](https://pz.v88.qzz.io/?url=https://api.apibdzy.com/api.php/provide/vod) | ❌ | 13 | 17 | 43.3% | ❌❌❌❌❌❌❌ |
-| 🚨 | 🎬艾旦影视 | [Link](https://lovedan.net) | [Link](https://pz.v88.qzz.io/?url=https://lovedan.net/api.php/provide/vod) | ❌ | 13 | 17 | 43.3% | ❌❌❌❌❌❌❌ |
+| ✅ | 🔞黄色仓库 | [Link](https://hsckzy.xyz) | [Link](https://hsckzy.xyz/api.php/provide/vod) | ✅ | 29 | 1 | 96.7% | ❌✅✅✅✅✅✅ |
+| ✅ | 🔞souavZY | [Link](https://api.souavzyw.net) | [Link](https://api.souavzyw.net/api.php/provide/vod) | ✅ | 28 | 2 | 93.3% | ✅❌❌✅✅✅✅ |
+| ✅ | 🔞鲨鱼资源 | [Link](https://shayuapi.com) | [Link](https://shayuapi.com/api.php/provide/vod) | ✅ | 28 | 2 | 93.3% | ✅❌✅✅✅✅✅ |
+| 🚨 | 🎬百度云zy | [Link](https://bdzy1.com) | [Link](https://pz.v88.qzz.io/?url=https://api.apibdzy.com/api.php/provide/vod) | ❌ | 14 | 16 | 46.7% | ❌❌❌❌❌❌❌ |
+| 🚨 | 🎬艾旦影视 | [Link](https://lovedan.net) | [Link](https://pz.v88.qzz.io/?url=https://lovedan.net/api.php/provide/vod) | ❌ | 14 | 16 | 46.7% | ❌❌❌❌❌❌❌ |
 | 🚨 | 🔞细胞资源 | [Link](https://www.xxibaozyw.com) | [Link](https://www.xxibaozyw.com/api.php/provide/vod) | ❌ | 8 | 22 | 26.7% | ❌❌❌❌❌❌❌ |
 | 🚨 | 🔞香蕉资源 | [Link](https://www.xiangjiaozyw.com) | [Link](https://www.xiangjiaozyw.com/api.php/provide/vod) | ❌ | 8 | 22 | 26.7% | ❌❌❌❌❌❌❌ |
 | 🚨 | 🎬飘零资源 | [Link](https://p2100.net) | [Link](https://p2100.net/api.php/provide/vod) | ❌ | 2 | 25 | 7.4% | ❌❌❌❌❌❌❌ |
 <!-- API_TABLE_END -->
-
----
 
 # 免责声明
 
@@ -521,220 +570,12 @@ console.log(`Request from: ${request.headers.get('cf-connecting-ip')}`)
 1. 维护者保留在不另行通知的情况下，随时修改或补充本免责声明的权利。
 2. 任何对本仓库内容的访问、使用、复制、修改或分发行为，均视为已充分阅读并接受本免责声明的全部内容。
 
-
+---
 
 **若您不同意本免责声明中的任何条款，请立即停止使用并删除本仓库的全部内容。**
 
-
 ---
 
-
-
 ## ⭐ Star History
-[![Star History](https://starchart.cc/hafrey1/LunaTV-config.svg?variant=light)](https://starchart.cc/hafrey1/LunaTV-config)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[![Star History](https://starchart.cc/DeleteHR/LunaTV-config.svg?variant=light)](https://starchart.cc/DeleteHR/LunaTV-config)
