@@ -238,7 +238,7 @@
       "key": "bdzy1_com",
       "name": "🎬百度云zy",
       "type": 1,
-      "api": "https://pz.v88.qzz.io/?url=https://api.apibdzy.com/api.php/provide/vod",
+      "api": "https://api.apibdzy.com/api.php/provide/vod",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0
@@ -247,7 +247,7 @@
       "key": "lovedan_net",
       "name": "🎬艾旦影视",
       "type": 1,
-      "api": "https://pz.v88.qzz.io/?url=https://lovedan.net/api.php/provide/vod",
+      "api": "https://lovedan.net/api.php/provide/vod",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0
