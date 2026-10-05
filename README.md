@@ -507,9 +507,9 @@ console.log(`Request from: ${request.headers.get('cf-connecting-ip')}`)
 
 ---
 
-## 二、仓库用途说明（MoonTV / LunaTV 源配置）
+## 二、仓库用途说明（MoonTV / LunaTV / Tvbox源配置）
 
-1. 本仓库主要提供 **MoonTV / LunaTV 等相关项目的源配置、订阅定义或配置示例**，内容均整理自互联网公开信息。
+1. 本仓库主要提供 **MoonTV/LunaTV/Tvbox等相关项目的源配置、订阅定义或配置示例**，内容均整理自互联网公开信息。
 2. 本仓库内容 **仅用于学习、测试与技术研究目的**，包括但不限于配置格式研究、源聚合方式分析及客户端兼容性测试。
 3. **本仓库不存储、不托管、不分发任何音视频文件、媒体流或受版权保护的内容**，亦不提供任何形式的媒体服务。
 4. 除非另有明确书面声明，本仓库 **不授予任何商业使用许可**。
@@ -587,7 +587,3 @@ console.log(`Request from: ${request.headers.get('cf-connecting-ip')}`)
 **若您不同意本免责声明中的任何条款，请立即停止使用并删除本仓库的全部内容。**
 
 ---
-
-## ⭐ Star History
-
-[![Star History](https://starchart.cc/DeleteHR/LunaTV-config.svg?variant=light)](https://starchart.cc/DeleteHR/LunaTV-config)
